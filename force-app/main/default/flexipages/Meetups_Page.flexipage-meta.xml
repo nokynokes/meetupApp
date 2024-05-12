@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
+        <name>region1</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>enableInlineEdit</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>entityName</name>
@@ -31,6 +35,10 @@
                 <identifier>flexipage_filterListCard</identifier>
             </componentInstance>
         </itemInstances>
+        <name>region2</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
@@ -46,26 +54,22 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Recent Items</value>
+                    <value>Recent Meetup Items</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>maxRecords</name>
-                    <value>3</value>
+                    <value>5</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:recentItems</componentName>
                 <identifier>flexipage_recentItems</identifier>
             </componentInstance>
         </itemInstances>
-        <name>column1</name>
+        <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>
-    <flexiPageRegions>
-        <name>column2</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <masterLabel>Meetup App</masterLabel>
+    <masterLabel>Meetups Page</masterLabel>
     <template>
-        <name>flexipage:appHomeTemplateTwoColumns</name>
+        <name>flexipage:appHomeTemplateHeaderTwoColumns</name>
     </template>
     <type>AppPage</type>
 </FlexiPage>
