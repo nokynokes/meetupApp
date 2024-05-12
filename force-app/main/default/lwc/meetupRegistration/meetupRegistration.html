@@ -1,3 +1,23 @@
 <template>
-    <p>{registrationCode}</p>
+    <lightning-card>
+        <template lwc:if={meetup.data}>
+            <h3 slot="title">
+                Register for the following meetup: {meetupName}
+            </h3>
+            <div>
+                <p class="slds-p-horizontal_small">Registration Status: {meetupRegistrationStatus} </p>
+                <p class="slds-p-horizontal_small">Registration Limit: {meetupRegistrationLimit} </p>
+            </div>
+            <lightning-record-form
+                object-api-name={meetupRegistrationObj}
+                fields={meetupRegistrationFields}
+            ></lightning-record-form>
+        </template>
+        <template lwc:elseif={error}>
+            <p>{error}</p>
+        </template>
+        <template lwc:else>
+            <p> Meetup not found! </p>
+        </template>
+    </lightning-card>
 </template>
