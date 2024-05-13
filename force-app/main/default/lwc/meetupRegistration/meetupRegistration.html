@@ -1,5 +1,5 @@
 <template>
-    <lightning-card>
+    <lightning-card variant="Narrow">
         <template lwc:if={data}>
             <lightning-button 
                 slot="actions" 
@@ -30,7 +30,7 @@
                 <lightning-input-field field-name={meetupField}>
                 </lightning-input-field>
                 <div class="slds-var-m-top_medium">
-                    <lightning-button variant="brand" type="submit" label="Search">
+                    <lightning-button class="slds-m-left_x-small" variant="brand" type="submit" label="Search">
                     </lightning-button>
                 </div>
             </lightning-record-edit-form>
