@@ -40,11 +40,9 @@ export default class MeetupRegistration extends LightningElement {
     }
 
     handleSearchSubmit(event) {
-        console.log('hi')
         event.preventDefault();
         const id = event.detail.fields.Meetup__c;
-        console.log(id);
-
+    
         getCode({ search: id })
             .then((results) => {
                 this.registrationCode = results;    
