@@ -18,6 +18,8 @@ private class TestMeetupRegistrationDAC {
         meetups.add(meetup2);
         insert meetups;
 
+        Test.startTest();
+        
         String fakeId1 = TestUtils.getFakeMeetupRegistrationId();
         MeetupRegistration__c registration1 = new MeetupRegistration__c(
             Id = fakeId1,
@@ -34,16 +36,16 @@ private class TestMeetupRegistrationDAC {
             LastName__c = 'Cretney',
             Meetup__c = meetup2.Id
         );
-        
-        Test.startTest();
 
         List<MeetupRegistration__c> registrations = new List<MeetupRegistration__c>();
         registrations.add(registration1);
         registrations.add(registration2);
 
+        MeetupRegistrationDTO dto = new MeetupRegistrationDAC(registrations).getDTO();
+
         Test.stopTest();
 
-        MeetupRegistrationDTO dto = new MeetupRegistrationDAC(registrations).getDTO();
+        
         System.assertEquals(meetup1.Id, dto.getMeetup(registration1.Id).Id, 'DTO should map meetup registration with correct meetup');
         System.assertEquals(meetup2.Id, dto.getMeetup(registration2.Id).Id, 'DTO should map meetup registration with correct meetup');
     }

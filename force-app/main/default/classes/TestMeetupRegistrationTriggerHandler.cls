@@ -5,12 +5,11 @@ private class TestMeetupRegistrationTriggerHandler {
     private static void testPreventRegisteringWhenExceedingMeetupLimit(){
         Meetup__c meetup = new Meetup__c(
             Name = 'Cool kids only',
-            RegistrationLimit__c = 1,
+            RegistrationLimit__c = 2,
             Status__c = 'Open'
         );
 
         insert meetup;
-        System.debug('hi');
         MeetupRegistration__c reg1 = new MeetupRegistration__c(
             Meetup__c = meetup.Id,
             FirstName__c = 'Nolan but cooler',
@@ -24,14 +23,22 @@ private class TestMeetupRegistrationTriggerHandler {
 
         DmlException expectedException;
         try {
+            List<MeetupRegistration__c> regs = new List<MeetupRegistration__c>();
             MeetupRegistration__c reg2 = new MeetupRegistration__c(
                 Meetup__c = meetup.Id,
                 FirstName__c = 'Nolan but not as cool',
                 LastName__c = 'Cretney',
                 Email__c = 'nolan.cretney@lesscoolsville.com'
             );
-
-            insert reg2;
+            regs.add(reg2);
+            MeetupRegistration__c reg3 = new MeetupRegistration__c(
+                Meetup__c = meetup.Id,
+                FirstName__c = 'Nolan',
+                LastName__c = 'Cretney',
+                Email__c = 'nolan.cretney@gmail.com'
+            );
+            regs.add(reg3);
+            insert regs;
         } catch(DmlException e) {
             expectedException = e;
         }
@@ -40,5 +47,27 @@ private class TestMeetupRegistrationTriggerHandler {
 
         System.assertNotEquals(null, expectedException, 'You should not be able to add mroe registrations for the meetup');
         System.assertEquals(1, [SELECT COUNT() FROM MeetupRegistration__c], 'Database should be unchanged');
+    }
+
+    @isTest
+    private static void testAutoGenerateName() {
+        Meetup__c meetup = new Meetup__c(
+            Name = 'Cool kids only',
+            RegistrationLimit__c = 2,
+            Status__c = 'Open'
+        );
+
+        insert meetup;
+        MeetupRegistration__c reg1 = new MeetupRegistration__c(
+            Meetup__c = meetup.Id,
+            FirstName__c = 'Nolan but cooler',
+            LastName__c = 'Cretney',
+            Email__c = 'nolan.cretney@coolsville.com'
+        );
+
+        insert reg1;
+
+        reg1 = [SELECT Id, Name FROM MeetupRegistration__c WHERE Id = :reg1.Id];
+        System.assertEquals('1', reg1.Name, 'Name field should have been auto generated');
     }
 }
