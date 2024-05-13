@@ -1,18 +1,17 @@
-import { LightningElement, wire, track } from 'lwc';
-import { CurrentPageReference } from 'lightning/navigation';
+import { LightningElement, wire } from 'lwc';
+import { CurrentPageReference, NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getMeetupByRegistrationCode from '@salesforce/apex/MeetupRegistrationController.getMeetupByRegistrationCode';
 import MEETUP_REGISTRATION_OBJECT from '@salesforce/schema/MeetupRegistration__c';
 import EMAIL_FIELD from '@salesforce/schema/MeetupRegistration__c.Email__c'; 
 import FIRST_NAME_FIELD from '@salesforce/schema/MeetupRegistration__c.FirstName__c';
-import LAST_NAME_FIELD from '@salesforce/schema/MeetupRegistration__c.LastName__c';
-import MEETUP_FIELD from '@salesforce/schema/MeetupRegistration__c.Meetup__c';   
+import LAST_NAME_FIELD from '@salesforce/schema/MeetupRegistration__c.LastName__c';   
 
-export default class MeetupRegistration extends LightningElement {
+export default class MeetupRegistration extends NavigationMixin(LightningElement) {
     meetupRegistrationObj = MEETUP_REGISTRATION_OBJECT;
     meetupRegistrationFields = [EMAIL_FIELD, FIRST_NAME_FIELD, LAST_NAME_FIELD];
     
-    @track registrationCode;
+    registrationCode;
 
     @wire(CurrentPageReference)
     setRegistrationCodeFromURL(currentPageReference) {
@@ -33,9 +32,11 @@ export default class MeetupRegistration extends LightningElement {
     }
 
     handleSuccess(event) {
+        console.log('success!');
+        console.log(event);
         this.dispatchEvent(new ShowToastEvent({
-            title: 'Registration Created!',
-            message: `Record ID: ${event.detail.id}`,
+            title: 'Registration Complete!',
+            message: `You have now registered for: ${this.meetup.data.Name}`,
             variant: 'success'
         }));
     }
