@@ -43,7 +43,56 @@
         <type>Flexipage</type>
         <profile>StandardAul</profile>
     </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Meetup_Registration1</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>MeetupRegistration__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Standard</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Meetup_Registration1</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>MeetupRegistration__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Standard</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Meetup_Registration1</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>MeetupRegistration__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>StandardAul</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Meetup_Registration1</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>MeetupRegistration__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>StandardAul</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Meetup_Registration1</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>MeetupRegistration__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Meetup_Registration1</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>MeetupRegistration__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
     <tabs>Meetups_Page</tabs>
+    <tabs>Meetup_Registration</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Meetups_App_UtilityBar</utilityBar>
 </CustomApplication>

@@ -23,6 +23,10 @@
                 <behavior>Edit</behavior>
                 <field>RegistrationCode__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>RegistrationCount__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
