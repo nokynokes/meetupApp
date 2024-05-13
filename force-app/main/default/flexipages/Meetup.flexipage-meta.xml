@@ -3,12 +3,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentInstanceProperties>
-                    <name>configuration</name>
-                    <value>DEPLOYMENT</value>
-                </componentInstanceProperties>
-                <componentName>industries_service_excellence:actionLauncher</componentName>
-                <identifier>industries_service_excellence_actionLauncher</identifier>
+                <componentName>redirectToRegistration</componentName>
+                <identifier>c_redirectToRegistration</identifier>
             </componentInstance>
         </itemInstances>
         <name>header</name>
