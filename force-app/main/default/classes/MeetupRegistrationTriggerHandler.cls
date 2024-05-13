@@ -12,7 +12,6 @@ public with sharing class MeetupRegistrationTriggerHandler extends TriggerHandle
         for(MeetupRegistration__c registration : this.triggerNew) {
             Meetup__c meetup = this.dto.getMeetup(registration.Id);
             if(meetup.RegistrationCount__c + 1 > meetup.RegistrationLimit__c){
-                System.debug('error!');
                 registration.addError('You cannot exceed the meetup limit!');
             }
         }
