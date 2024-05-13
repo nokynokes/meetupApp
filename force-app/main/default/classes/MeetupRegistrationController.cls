@@ -1,9 +1,10 @@
 public with sharing class MeetupRegistrationController {
     
     @AuraEnabled(cacheable=true)
-    public static List<Meetup__c> getMeetupsByName(String searchName){
+    public static String getCode(Id search){
         try {
-            return [SELECT Id, Name, RegistrationCode__c FROM Meetup__c WHERE Name LIKE :searchName];
+            Meetup__c meetup =  [SELECT  Id, RegistrationCode__c FROM Meetup__c WHERE Id = :search];
+            return meetup.RegistrationCode__c;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
