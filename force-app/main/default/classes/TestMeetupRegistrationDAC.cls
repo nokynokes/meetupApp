@@ -46,7 +46,10 @@ private class TestMeetupRegistrationDAC {
         Test.stopTest();
 
         
-        System.assertEquals(meetup1.Id, dto.getMeetup(registration1.Id).Id, 'DTO should map meetup registration with correct meetup');
-        System.assertEquals(meetup2.Id, dto.getMeetup(registration2.Id).Id, 'DTO should map meetup registration with correct meetup');
+        System.assertEquals('Introvert Meetup', dto.getMeetup(meetup1.Id).Name, 'DTO should map meetup correctly');
+        System.assertEquals('Extrovert Meetup', dto.getMeetup(meetup2.Id).Name, 'DTO should map meetup correctly');
+
+        System.assertEquals(1, dto.getRegistrations(meetup1.Id).size(), 'DTO should map meetup registrations correctly');
+        System.assertEquals(1, dto.getRegistrations(meetup2.Id).size(), 'DTO should map meetup registartions correctly');
     }
 }
