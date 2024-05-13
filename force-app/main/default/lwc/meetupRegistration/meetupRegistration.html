@@ -1,31 +1,39 @@
 <template>
     <lightning-card>
-        <template lwc:if={meetup.data}>
+        <template lwc:if={data}>
+            <lightning-button 
+                slot="actions" 
+                variant="brand"
+                label="Search for other Meetups"
+                onclick={handleClick}
+            >
+            </lightning-button>
             <h3 slot="title">
                 Register for the following meetup: {meetupName}
             </h3>
-            <div>
-                <p class="slds-p-horizontal_small">Registration Status: {meetupRegistrationStatus} </p>
-                <p class="slds-p-horizontal_small">Registration Limit: {meetupRegistrationLimit} </p>
-                <p class="slds-p-horizontal_small">Registration Count: {meetupRegistrationCount} </p>
-            </div>
-            <template lwc:if={limitNotReached}>
-                <lightning-record-form
-                    object-api-name={meetupRegistrationObj}
-                    fields={meetupRegistrationFields}
-                    onsubmit={handleSubmit}
-                    onsuccess={handleSuccess}
-                ></lightning-record-form>
-            </template>
-            <template lwc:else>
-                <p class="slds-p-horizontal_small">Cannot Register for this event, limit reached!</p>
-            </template>
+            <lightning-record-form
+                object-api-name={meetupRegistrationObj}
+                fields={meetupRegistrationFields}
+                onsubmit={handleSubmit}
+                onsuccess={handleSuccess}
+            ></lightning-record-form>
         </template>
         <template lwc:elseif={error}>
-            <p>{error}</p>
+            <p class="slds-p-horizontal_small"></p>{error}</p>
         </template>
         <template lwc:else>
-            <p> Meetup not found! </p>
+            <h3 slot="title"> Search for a meetup! </h3>
+            <lightning-record-edit-form
+                object-api-name={meetupRegistrationObj}
+                onsubmit={handleSearchSubmit}
+            >
+                <lightning-input-field field-name={meetupField}>
+                </lightning-input-field>
+                <div class="slds-var-m-top_medium">
+                    <lightning-button variant="brand" type="submit" label="Search">
+                    </lightning-button>
+                </div>
+            </lightning-record-edit-form>
         </template>
     </lightning-card>
 </template>
