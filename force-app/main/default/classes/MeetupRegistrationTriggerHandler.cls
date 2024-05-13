@@ -11,6 +11,7 @@ public with sharing class MeetupRegistrationTriggerHandler extends TriggerHandle
     public override void beforeInsert(){
         validateMeetupLimit();
         validateMeetupStatus();
+        validateUniqueEmailPerMeetup();
 
         for(MeetupRegistration__c registration : this.triggerNew) {
             Meetup__c meetup = this.dto.getMeetup(registration.Meetup__c);
@@ -33,6 +34,25 @@ public with sharing class MeetupRegistrationTriggerHandler extends TriggerHandle
             Meetup__c meetup = this.dto.getMeetup(registration.Meetup__c);
             if(meetup.Status__c == 'Closed'){
                 registration.addError('You cannot register for meetups that are closed!');
+            }
+        }
+    }
+
+    private void validateUniqueEmailPerMeetup() {
+        Map<Id, Set<String>> registeredEmails = new Map<Id,Set<String>>();
+        for(Meetup__c meetup: this.dto.getAllMeetups()){
+            Set<String> emails = new Set<String>();
+            for(MeetupRegistration__c reg: meetup.MeetupRegistrations__r) {
+                emails.add(reg.Email__c);
+            }
+
+            registeredEmails.put(meetup.Id, emails);
+        }
+
+        for(MeetupRegistration__c registration : this.triggerNew) {
+            Meetup__c meetup = this.dto.getMeetup(registration.Meetup__c);
+            if(registeredEmails.get(meetup.Id).contains(registration.Email__c)) {
+                registration.addError('You already registered with that email!');
             }
         }
     }

@@ -12,7 +12,7 @@ public with sharing class MeetupRegistrationDAC {
             meetupIds.add(registration.Meetup__c);
         }
 
-        Map<Id, Meetup__c> meetups = new Map<Id, Meetup__c>([SELECT Id, Name, Status__c, RegistrationCode__c, RegistrationLimit__c, RegistrationCount__c, OwnerId FROM Meetup__c WHERE Id in :meetupIds]);
+        Map<Id, Meetup__c> meetups = new Map<Id, Meetup__c>([SELECT Id, Name, Status__c, RegistrationCode__c, RegistrationLimit__c, RegistrationCount__c, (SELECT Id, FirstName__c, LastName__c, Email__c, Name FROM MeetupRegistrations__r) FROM Meetup__c WHERE Id in :meetupIds]);
         Map<Id, List<MeetupRegistration__c>> meetupsToRegistrations = new Map<Id, List<MeetupRegistration__c>>();
 
         for(MeetupRegistration__c registration : this.meetupRegs) {

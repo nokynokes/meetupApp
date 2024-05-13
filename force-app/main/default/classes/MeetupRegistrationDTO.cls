@@ -14,4 +14,8 @@ public with sharing class MeetupRegistrationDTO {
     public List<MeetupRegistration__c> getRegistrations(Id meetupId){
         return this.meetupsToRegistrations.get(meetupId);
     }
+
+    public List<Meetup__c> getAllMeetups() {
+        return this.meetups.values();
+    }
 }
