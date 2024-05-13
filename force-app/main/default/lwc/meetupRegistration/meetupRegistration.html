@@ -7,11 +7,18 @@
             <div>
                 <p class="slds-p-horizontal_small">Registration Status: {meetupRegistrationStatus} </p>
                 <p class="slds-p-horizontal_small">Registration Limit: {meetupRegistrationLimit} </p>
+                <p class="slds-p-horizontal_small">Registration Count: {meetupRegistrationCount} </p>
             </div>
-            <lightning-record-form
-                object-api-name={meetupRegistrationObj}
-                fields={meetupRegistrationFields}
-            ></lightning-record-form>
+            <template lwc:if={limitNotReached}>
+                <lightning-record-form
+                    object-api-name={meetupRegistrationObj}
+                    fields={meetupRegistrationFields}
+                    onsubmit={handleSubmit}
+                ></lightning-record-form>
+            </template>
+            <template lwc:else>
+                <p class="slds-p-horizontal_small">Cannot Register for this event, limit reached!</p>
+            </template>
         </template>
         <template lwc:elseif={error}>
             <p>{error}</p>
