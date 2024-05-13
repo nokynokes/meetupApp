@@ -7,8 +7,8 @@ public with sharing class MeetupRegistrationDTO {
         this.meetups = meetups;
     }
 
-    public Meetup__c getMeetup(Id meetupId){
-        return this.meetups.get(meetupId);
+    public Meetup__c getMeetup(Id regId){
+        return this.meetups.get(regId);
     }
 
     public List<MeetupRegistration__c> getRegistrations(Id meetupId){
