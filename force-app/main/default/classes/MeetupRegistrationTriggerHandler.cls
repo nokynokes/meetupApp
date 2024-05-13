@@ -9,14 +9,31 @@ public with sharing class MeetupRegistrationTriggerHandler extends TriggerHandle
     }
 
     public override void beforeInsert(){
+        validateMeetupLimit();
+        validateMeetupStatus();
+
+        for(MeetupRegistration__c registration : this.triggerNew) {
+            Meetup__c meetup = this.dto.getMeetup(registration.Meetup__c);
+            registration.Name = String.valueOf(meetup.RegistrationCount__c + 1);
+        }
+    }
+
+    private void validateMeetupLimit(){
         for(MeetupRegistration__c registration : this.triggerNew) {
             Meetup__c meetup = this.dto.getMeetup(registration.Meetup__c);
             Integer regsSize = this.dto.getRegistrations(meetup.Id).size();
             if(meetup.RegistrationCount__c + regsSize > meetup.RegistrationLimit__c){
                 registration.addError('You cannot exceed the meetup limit!');
             }
-            
-            registration.Name = String.valueOf(meetup.RegistrationCount__c + 1);
+        }
+    }
+
+    private void validateMeetupStatus(){
+        for(MeetupRegistration__c registration : this.triggerNew) {
+            Meetup__c meetup = this.dto.getMeetup(registration.Meetup__c);
+            if(meetup.Status__c == 'Closed'){
+                registration.addError('You cannot register for meetups that are closed!');
+            }
         }
     }
 }
