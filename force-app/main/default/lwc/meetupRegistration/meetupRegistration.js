@@ -9,7 +9,7 @@ import MEETUP_FIELD from '@salesforce/schema/MeetupRegistration__c.Meetup__c';
 
 export default class MeetupRegistration extends LightningElement {
     meetupRegistrationObj = MEETUP_REGISTRATION_OBJECT;
-    meetupRegistrationFields = [EMAIL_FIELD, FIRST_NAME_FIELD, LAST_NAME_FIELD];
+    meetupRegistrationFields = [EMAIL_FIELD, FIRST_NAME_FIELD, LAST_NAME_FIELD, MEETUP_FIELD];
     
     @track registrationCode;
 

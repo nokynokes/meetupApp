@@ -34,10 +34,14 @@ private class TestMeetupRegistrationDAC {
             LastName__c = 'Cretney',
             Meetup__c = meetup2.Id
         );
+        
+        Test.startTest();
 
         List<MeetupRegistration__c> registrations = new List<MeetupRegistration__c>();
         registrations.add(registration1);
         registrations.add(registration2);
+
+        Test.stopTest();
 
         MeetupRegistrationDTO dto = new MeetupRegistrationDAC(registrations).getDTO();
         System.assertEquals(meetup1.Id, dto.getMeetup(registration1.Id).Id, 'DTO should map meetup registration with correct meetup');

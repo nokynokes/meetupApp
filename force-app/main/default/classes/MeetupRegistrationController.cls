@@ -12,7 +12,7 @@ public with sharing class MeetupRegistrationController {
     @AuraEnabled(cacheable=true)
     public static Meetup__c getMeetupByRegistrationCode(String registrationCode) {
         try {
-            return [SELECT Id, Name, RegistrationLimit__c, RegistrationCode__c, Status__c FROM Meetup__c WHERE RegistrationCode__c = :registrationCode AND Status__c = 'Open'];
+            return [SELECT Id, Name, RegistrationLimit__c, RegistrationCode__c, Status__c FROM Meetup__c WHERE RegistrationCode__c = :registrationCode];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

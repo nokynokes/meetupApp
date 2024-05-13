@@ -13,8 +13,11 @@ private class TestMeetupTriggerHandler {
             ));
         }
 
+        Test.startTest();
+
         insert meetups;
 
+        Test.stopTest();
 
         for(Meetup__c meetup : [SELECT Id, RegistrationCode__c FROM Meetup__c]){
             System.assert(!String.isBlank(meetup.RegistrationCode__c), 'Registration Code should be auto generated for new records');
